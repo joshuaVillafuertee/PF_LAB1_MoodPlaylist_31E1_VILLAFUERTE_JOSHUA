@@ -1,4 +1,4 @@
-﻿using MoodPlaylistGenerator.Models;
+using MoodPlaylistGenerator.Models;
 
 namespace MoodPlaylistGenerator.Services
 {

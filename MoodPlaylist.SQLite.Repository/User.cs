@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MoodPlaylistGenerator.Models
+namespace MoodPlaylist.SQLite.Repository.Models
 {
     public class User
     {
@@ -26,3 +26,4 @@ namespace MoodPlaylistGenerator.Models
         public List<Playlist> Playlists { get; set; } = new();
     }
 }
+

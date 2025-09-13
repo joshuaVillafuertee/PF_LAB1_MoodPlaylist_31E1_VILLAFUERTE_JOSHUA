@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using MoodPlaylistGenerator.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MoodPlaylist.SQLite.Models; // 🔥 use the new Models namespace
 
-namespace MoodPlaylistGenerator.Data
+namespace MoodPlaylist.SQLite.Data // 🔥 keep it consistent with your new folder/project
 {
     public class ApplicationDbContext : DbContext
     {
@@ -23,12 +23,12 @@ namespace MoodPlaylistGenerator.Data
             // Configure SongMood junction table
             modelBuilder.Entity<SongMood>()
                 .HasKey(sm => new { sm.SongId, sm.MoodId });
-            
+
             modelBuilder.Entity<SongMood>()
                 .HasOne(sm => sm.Song)
                 .WithMany(s => s.SongMoods)
                 .HasForeignKey(sm => sm.SongId);
-            
+
             modelBuilder.Entity<SongMood>()
                 .HasOne(sm => sm.Mood)
                 .WithMany(m => m.SongMoods)
@@ -37,12 +37,12 @@ namespace MoodPlaylistGenerator.Data
             // Configure PlaylistSong junction table
             modelBuilder.Entity<PlaylistSong>()
                 .HasKey(ps => new { ps.PlaylistId, ps.SongId });
-            
+
             modelBuilder.Entity<PlaylistSong>()
                 .HasOne(ps => ps.Playlist)
                 .WithMany(p => p.PlaylistSongs)
                 .HasForeignKey(ps => ps.PlaylistId);
-            
+
             modelBuilder.Entity<PlaylistSong>()
                 .HasOne(ps => ps.Song)
                 .WithMany(s => s.PlaylistSongs)

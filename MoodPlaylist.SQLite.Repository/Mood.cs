@@ -1,20 +1,19 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MoodPlaylist.SQLite.Repository.Models
+namespace MoodPlaylist.SQLite.Models
 {
     public class Mood
     {
         public int Id { get; set; }
-        
+
         [Required]
         public string Name { get; set; } = string.Empty;
-        
-        public string Color { get; set; } = "#3B82F6"; // Default blue
+
+        public string Color { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
-        
-        // Navigation properties
+
         public List<SongMood> SongMoods { get; set; } = new();
         public List<Playlist> Playlists { get; set; } = new();
     }
 }
-

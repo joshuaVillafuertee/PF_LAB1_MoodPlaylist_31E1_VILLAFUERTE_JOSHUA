@@ -1,6 +1,5 @@
-﻿using MoodPlaylist.SQLite.Models;
-using MoodPlaylist.SQLite.Repository;
-using MoodPlaylistGenerator.Models;
+﻿using MoodPlaylist.SQLite.Data;
+using MoodPlaylist.SQLite.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,18 +7,31 @@ namespace MoodPlaylist.SQLite.Services
 {
     public class MoodService
     {
-        private readonly SongRepository _songRepository;
+        private readonly ApplicationDbContext _context;
 
-        public MoodService(SongRepository songRepository)
+        public MoodService(ApplicationDbContext context)
         {
-            _songRepository = songRepository;
+            _context = context;
         }
 
-        public IEnumerable<Song> GetSongsByMood(string mood)
+        public IEnumerable<Mood> GetAllMoods() => _context.Moods.ToList();
+
+        public Mood? GetMoodById(int id) => _context.Moods.FirstOrDefault(m => m.Id == id);
+
+        public void AddMood(Mood mood)
         {
-            return _songRepository
-                   .GetAllSongs()
-                   .Where(s => s.Mood.Equals(mood, System.StringComparison.OrdinalIgnoreCase));
+            _context.Moods.Add(mood);
+            _context.SaveChanges();
+        }
+
+        public void DeleteMood(int id)
+        {
+            var mood = _context.Moods.FirstOrDefault(m => m.Id == id);
+            if (mood != null)
+            {
+                _context.Moods.Remove(mood);
+                _context.SaveChanges();
+            }
         }
     }
 }

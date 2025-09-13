@@ -1,14 +1,10 @@
-using MoodPlaylistGenerator.Models;
+using System.Collections.Generic;
 
-namespace MoodPlaylistGenerator.ViewModels
+namespace MoodPlaylist.Web.ViewModels
 {
     public class DashboardViewModel
     {
-        public List<Song> RecentSongs { get; set; } = new();
-        public List<Playlist> RecentPlaylists { get; set; } = new();
-        public List<Mood> Moods { get; set; } = new();
-        public Dictionary<int, int> MoodSongCounts { get; set; } = new();
-        public int TotalSongs { get; set; }
-        public int TotalPlaylists { get; set; }
+        public List<PlaylistViewModel> Playlists { get; set; } = new();
+        public List<SongViewModel> Songs { get; set; } = new();
     }
 }

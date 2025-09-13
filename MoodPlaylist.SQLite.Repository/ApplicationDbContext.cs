@@ -1,13 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoodPlaylist.SQLite.Models; // 🔥 use the new Models namespace
+using MoodPlaylist.SQLite.Models; // ✅ only this
 
-namespace MoodPlaylist.SQLite.Data // 🔥 keep it consistent with your new folder/project
+namespace MoodPlaylist.SQLite.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Song> Songs { get; set; }
@@ -20,7 +18,7 @@ namespace MoodPlaylist.SQLite.Data // 🔥 keep it consistent with your new fold
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configure SongMood junction table
+            // SongMood junction
             modelBuilder.Entity<SongMood>()
                 .HasKey(sm => new { sm.SongId, sm.MoodId });
 
@@ -34,7 +32,7 @@ namespace MoodPlaylist.SQLite.Data // 🔥 keep it consistent with your new fold
                 .WithMany(m => m.SongMoods)
                 .HasForeignKey(sm => sm.MoodId);
 
-            // Configure PlaylistSong junction table
+            // PlaylistSong junction
             modelBuilder.Entity<PlaylistSong>()
                 .HasKey(ps => new { ps.PlaylistId, ps.SongId });
 
@@ -48,7 +46,7 @@ namespace MoodPlaylist.SQLite.Data // 🔥 keep it consistent with your new fold
                 .WithMany(s => s.PlaylistSongs)
                 .HasForeignKey(ps => ps.SongId);
 
-            // Seed data for moods
+            // Seed moods
             modelBuilder.Entity<Mood>().HasData(
                 new Mood { Id = 1, Name = "Happy", Color = "#FFD700", Description = "Upbeat and energetic songs" },
                 new Mood { Id = 2, Name = "Sad", Color = "#4169E1", Description = "Melancholic and emotional songs" },

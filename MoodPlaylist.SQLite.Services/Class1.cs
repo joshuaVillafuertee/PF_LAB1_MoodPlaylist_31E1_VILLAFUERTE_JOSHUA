@@ -1,6 +1,6 @@
-namespace MoodPlaylist.SQLite.Services;
-
-public class Class1
+namespace MoodPlaylist.SQLite.Services
 {
-
+    public class Class1
+    {
+    }
 }

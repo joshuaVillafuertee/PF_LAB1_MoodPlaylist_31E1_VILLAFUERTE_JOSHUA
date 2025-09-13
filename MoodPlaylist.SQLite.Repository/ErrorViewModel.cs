@@ -1,8 +1,11 @@
-namespace MoodPlaylistGenerator.Models;
+using System; 
 
-public class ErrorViewModel
+namespace MoodPlaylist.Web.ViewModels
 {
-    public string? RequestId { get; set; }
-
-    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    public class PlaylistViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
+    }
 }

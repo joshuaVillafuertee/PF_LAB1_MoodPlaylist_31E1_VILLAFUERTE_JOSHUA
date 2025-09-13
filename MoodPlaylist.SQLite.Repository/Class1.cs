@@ -1,6 +1,1 @@
-namespace MoodPlaylist.SQLite.Repository;
-
-public class Class1
-{
-
-}
+namespace MoodPlaylist.SQLite.Repository;  public class Class1 {  }
